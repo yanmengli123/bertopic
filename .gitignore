@@ -1,0 +1,47 @@
+# Local Python / Node runtimes and generated caches
+.venv*/
+venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Credentials and local settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+secrets*.json
+
+# Source literature, embedding caches, trained models and generated reports
+/PubMed/
+/bertopic_analysis/cache/
+/bertopic_analysis/outputs/
+/.pubmed_merge_support/merge_report.json
+*.csv
+*.tsv
+*.xls
+*.xlsx
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.safetensors
+*.sqlite*
+*.zip
+*.zip.tmp
+*.log
+*.tmp
+
+# Editor and operating-system files
+.idea/
+.vscode/
+Thumbs.db
+Desktop.ini
+.DS_Store
