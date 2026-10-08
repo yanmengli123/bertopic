@@ -93,6 +93,8 @@ powershell -ExecutionPolicy Bypass -File D:\bertopic\bertopic_analysis\run.ps1 -
 
 入口是 `outputs/joint_bge_m3/figure_gallery.html`，支持离线搜索、15 类主图、全部 42 个主题的独立关键词图和真实分词频次词云。静态图包含 300 dpi PNG、SVG 和 PDF；独立词频词云的 SVG 使用原生文字。总览词云仍使用 c-TF-IDF 权重，不能称为原始词频。散点与总览词云的 SVG/PDF 可能含栅格层，清单中的 `contains_raster` 可用于判断。
 
+主分析报告统一引用这套最终图；`report.py` 不再生成主模型旧版同名图，避免与最终图库混用。中文子集模型的对照图继续保留。首次运行请使用完整流水线，由 `make_figures.py` 生成报告所引用的主模型图。
+
 ```powershell
 # 只读取已有模型结果：不调 API，不重新训练，不改主题分配。
 D:\bertopic\.venv_bertopic\Scripts\python.exe D:\bertopic\bertopic_analysis\make_figures.py
