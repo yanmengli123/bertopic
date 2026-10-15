@@ -1,5 +1,9 @@
 # 四库联合 BERTopic 文献分析
 
+通用工作流已整理到 [workflow/README.md](workflow/README.md)：支持维普、万方、知网、WoS、PubMed 的可配置导入、独立任务、嵌入、BERTopic、15 类图、验收和打包，并提供 CLI、Python SDK 与桌面进程桥。DSH 官方注册仍需按宿主 SDK 规范接入。
+
+下文记录原四库项目的历史运行方式及分析口径，原始数据和既有结果继续保留。
+
 将 CNKI、万方、PubMed 和 Web of Science 文献合并为一个语料，使用硅基流动 `BAAI/bge-m3` 嵌入与 BERTopic 完成主题分析。中文子集使用 `BAAI/bge-large-zh-v1.5` 作补充比较；两个向量空间分别建模。
 
 本仓库管理源代码、依赖版本和方法说明。原始文献、API 向量缓存、训练模型、CSV、图片、HTML 报告与压缩包保存在本地，由 `.gitignore` 排除。API 密钥从环境变量读取。

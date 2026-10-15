@@ -45,3 +45,11 @@ secrets*.json
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Portable workflow build/runtime files
+/workflow/runs/
+/workflow/.cache/
+/workflow/.validation/
+/workflow/build/
+/workflow/dist/
+/workflow/src/*.egg-info/

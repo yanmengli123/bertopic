@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "title": "多数据库文献主题分析",
+  "inputs": [
+    {"path": "data/维普.xlsx", "source": "VIP"},
+    {"path": "data/万方.xlsx", "source": "WanFang"},
+    {"path": "data/知网.xls", "source": "CNKI"},
+    {"path": "data/wos.csv", "source": "WoS"},
+    {"path": "data/pubmed.nbib", "source": "PubMed"}
+  ],
+  "output_root": "runs",
+  "cache_root": ".cache",
+  "import_options": {"invalid_rows": "quarantine", "deduplication": "none"},
+  "embedding": {
+    "backend": "siliconflow",
+    "model": "BAAI/bge-m3",
+    "api_key_env": "SILICONFLOW_API_KEY",
+    "batch_size": 16
+  },
+  "model": {"min_cluster_sizes": [15, 30, 50], "min_samples": 5, "seed": 42, "stability_seeds": [7, 11, 23]},
+  "report": {"year_end": 2026, "incomplete_year": 2026, "dpi": 300, "topic_details": 48}
+}

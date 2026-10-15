@@ -1,0 +1,596 @@
+{
+  "$defs": {
+    "EmbeddingOptions": {
+      "additionalProperties": false,
+      "properties": {
+        "allow_loopback_http": {
+          "default": false,
+          "title": "Allow Loopback Http",
+          "type": "boolean"
+        },
+        "allow_model_download": {
+          "default": true,
+          "title": "Allow Model Download",
+          "type": "boolean"
+        },
+        "api_key_env": {
+          "default": "SILICONFLOW_API_KEY",
+          "pattern": "^[A-Z][A-Z0-9_]*(?:_API_KEY|_TOKEN)$",
+          "title": "Api Key Env",
+          "type": "string"
+        },
+        "backend": {
+          "default": "siliconflow",
+          "enum": [
+            "siliconflow",
+            "openai_compatible",
+            "local",
+            "precomputed"
+          ],
+          "title": "Backend",
+          "type": "string"
+        },
+        "base_url": {
+          "default": "https://api.siliconflow.cn/v1",
+          "title": "Base Url",
+          "type": "string"
+        },
+        "batch_size": {
+          "default": 16,
+          "maximum": 128,
+          "minimum": 1,
+          "title": "Batch Size",
+          "type": "integer"
+        },
+        "device": {
+          "default": "cpu",
+          "enum": [
+            "cpu",
+            "cuda",
+            "mps"
+          ],
+          "title": "Device",
+          "type": "string"
+        },
+        "dimension": {
+          "anyOf": [
+            {
+              "maximum": 65536,
+              "minimum": 2,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dimension"
+        },
+        "max_tokens": {
+          "anyOf": [
+            {
+              "maximum": 32768,
+              "minimum": 8,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Tokens"
+        },
+        "metadata_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Metadata Path"
+        },
+        "model": {
+          "default": "BAAI/bge-m3",
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "model_revision": {
+          "default": "main",
+          "title": "Model Revision",
+          "type": "string"
+        },
+        "offline": {
+          "default": false,
+          "title": "Offline",
+          "type": "boolean"
+        },
+        "retries": {
+          "default": 4,
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Retries",
+          "type": "integer"
+        },
+        "timeout_seconds": {
+          "default": 120,
+          "maximum": 600,
+          "minimum": 5,
+          "title": "Timeout Seconds",
+          "type": "integer"
+        },
+        "tokenizer_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tokenizer Id"
+        },
+        "tokenizer_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tokenizer Path"
+        },
+        "vectors_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Vectors Path"
+        }
+      },
+      "title": "EmbeddingOptions",
+      "type": "object"
+    },
+    "ImportOptions": {
+      "additionalProperties": false,
+      "properties": {
+        "deduplication": {
+          "default": "none",
+          "enum": [
+            "none",
+            "exact_text",
+            "doi"
+          ],
+          "title": "Deduplication",
+          "type": "string"
+        },
+        "deduplication_scope": {
+          "default": "global",
+          "enum": [
+            "global",
+            "within_source"
+          ],
+          "title": "Deduplication Scope",
+          "type": "string"
+        },
+        "invalid_rows": {
+          "default": "quarantine",
+          "enum": [
+            "error",
+            "quarantine"
+          ],
+          "title": "Invalid Rows",
+          "type": "string"
+        },
+        "max_file_mb": {
+          "default": 512,
+          "maximum": 4096,
+          "minimum": 1,
+          "title": "Max File Mb",
+          "type": "integer"
+        },
+        "max_records": {
+          "default": 200000,
+          "minimum": 3,
+          "title": "Max Records",
+          "type": "integer"
+        },
+        "max_uncompressed_mb": {
+          "default": 1024,
+          "maximum": 8192,
+          "minimum": 1,
+          "title": "Max Uncompressed Mb",
+          "type": "integer"
+        },
+        "min_records": {
+          "default": 5,
+          "minimum": 3,
+          "title": "Min Records",
+          "type": "integer"
+        }
+      },
+      "title": "ImportOptions",
+      "type": "object"
+    },
+    "InputFile": {
+      "additionalProperties": false,
+      "properties": {
+        "delimiter": {
+          "anyOf": [
+            {
+              "maxLength": 1,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Delimiter"
+        },
+        "encoding": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Encoding"
+        },
+        "header_row": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Header Row"
+        },
+        "mapping": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "abstract",
+              "addresses",
+              "authors",
+              "category",
+              "countries",
+              "date",
+              "document_type",
+              "doi",
+              "institutions",
+              "journal",
+              "keywords",
+              "pmid",
+              "publication_type",
+              "research_areas",
+              "title",
+              "wos_id",
+              "year"
+            ]
+          },
+          "title": "Mapping",
+          "type": "object"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sheet": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sheet"
+        },
+        "source": {
+          "default": "auto",
+          "enum": [
+            "auto",
+            "VIP",
+            "CNKI",
+            "WanFang",
+            "WoS",
+            "PubMed",
+            "Generic"
+          ],
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "title": "InputFile",
+      "type": "object"
+    },
+    "ModelOptions": {
+      "additionalProperties": false,
+      "properties": {
+        "domain_terms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Domain Terms",
+          "type": "array"
+        },
+        "max_features": {
+          "default": 50000,
+          "minimum": 100,
+          "title": "Max Features",
+          "type": "integer"
+        },
+        "max_topics": {
+          "default": 1000,
+          "maximum": 10000,
+          "minimum": 2,
+          "title": "Max Topics",
+          "type": "integer"
+        },
+        "min_cluster_sizes": {
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 1,
+          "title": "Min Cluster Sizes",
+          "type": "array"
+        },
+        "min_samples": {
+          "default": 5,
+          "minimum": 1,
+          "title": "Min Samples",
+          "type": "integer"
+        },
+        "n_components": {
+          "default": 5,
+          "maximum": 20,
+          "minimum": 2,
+          "title": "N Components",
+          "type": "integer"
+        },
+        "n_neighbors": {
+          "default": 30,
+          "minimum": 2,
+          "title": "N Neighbors",
+          "type": "integer"
+        },
+        "representative_count": {
+          "default": 5,
+          "maximum": 30,
+          "minimum": 1,
+          "title": "Representative Count",
+          "type": "integer"
+        },
+        "seed": {
+          "default": 42,
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "silhouette_sample": {
+          "default": 2000,
+          "maximum": 10000,
+          "minimum": 20,
+          "title": "Silhouette Sample",
+          "type": "integer"
+        },
+        "stability_seeds": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Stability Seeds",
+          "type": "array"
+        },
+        "stopwords": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Stopwords",
+          "type": "array"
+        },
+        "top_n_words": {
+          "default": 20,
+          "maximum": 100,
+          "minimum": 5,
+          "title": "Top N Words",
+          "type": "integer"
+        }
+      },
+      "title": "ModelOptions",
+      "type": "object"
+    },
+    "ReportOptions": {
+      "additionalProperties": false,
+      "properties": {
+        "dpi": {
+          "default": 300,
+          "maximum": 600,
+          "minimum": 100,
+          "title": "Dpi",
+          "type": "integer"
+        },
+        "font_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Font Path"
+        },
+        "formats": {
+          "items": {
+            "enum": [
+              "png",
+              "svg",
+              "pdf"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Formats",
+          "type": "array"
+        },
+        "incomplete_year": {
+          "anyOf": [
+            {
+              "maximum": 2200,
+              "minimum": 1500,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Incomplete Year"
+        },
+        "max_plot_documents": {
+          "default": 60000,
+          "minimum": 100,
+          "title": "Max Plot Documents",
+          "type": "integer"
+        },
+        "network_min_cosine": {
+          "default": 0.5,
+          "maximum": 1,
+          "minimum": -1,
+          "title": "Network Min Cosine",
+          "type": "number"
+        },
+        "network_quantile": {
+          "default": 0.95,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Network Quantile",
+          "type": "number"
+        },
+        "time_bin_years": {
+          "default": 5,
+          "maximum": 50,
+          "minimum": 1,
+          "title": "Time Bin Years",
+          "type": "integer"
+        },
+        "top_topics": {
+          "default": 16,
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Top Topics",
+          "type": "integer"
+        },
+        "topic_details": {
+          "default": 48,
+          "maximum": 1000,
+          "minimum": 0,
+          "title": "Topic Details",
+          "type": "integer"
+        },
+        "year_end": {
+          "maximum": 2200,
+          "minimum": 1500,
+          "title": "Year End",
+          "type": "integer"
+        },
+        "year_start": {
+          "anyOf": [
+            {
+              "maximum": 2200,
+              "minimum": 1500,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Year Start"
+        }
+      },
+      "title": "ReportOptions",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cache_root": {
+      "default": ".cache",
+      "title": "Cache Root",
+      "type": "string"
+    },
+    "embedding": {
+      "$ref": "#/$defs/EmbeddingOptions"
+    },
+    "import_options": {
+      "$ref": "#/$defs/ImportOptions"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/InputFile"
+      },
+      "minItems": 1,
+      "title": "Inputs",
+      "type": "array"
+    },
+    "model": {
+      "$ref": "#/$defs/ModelOptions"
+    },
+    "output_root": {
+      "default": "runs",
+      "title": "Output Root",
+      "type": "string"
+    },
+    "report": {
+      "$ref": "#/$defs/ReportOptions"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "title": {
+      "default": "文献主题分析",
+      "maxLength": 256,
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "inputs"
+  ],
+  "title": "WorkflowConfig",
+  "type": "object"
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "title": "现有四库的通用工作流迁移",
+  "inputs": [
+    {"path": "../../CNKI.xls", "source": "CNKI"},
+    {"path": "../../WanFangdata.xlsx", "source": "WanFang"},
+    {"path": "../../pubmed_merged_bertopic.csv", "source": "PubMed"},
+    {"path": "../../wos.csv", "source": "WoS"}
+  ],
+  "output_root": "../runs",
+  "cache_root": "../.cache",
+  "import_options": {"deduplication": "none", "invalid_rows": "error"},
+  "embedding": {
+    "backend": "siliconflow",
+    "model": "BAAI/bge-m3",
+    "dimension": 1024,
+    "api_key_env": "SILICONFLOW_API_KEY",
+    "tokenizer_path": "../../bertopic_analysis/cache/BAAI_bge-m3_tokenizer.json"
+  },
+  "model": {"min_cluster_sizes": [30, 50, 80], "min_samples": 10, "stability_seeds": [7, 11, 23]},
+  "report": {"year_end": 2026, "incomplete_year": 2026, "topic_details": 48}
+}

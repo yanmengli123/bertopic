@@ -1,0 +1,27 @@
+{
+  "contractVersion": 1,
+  "id": "dsh.bertopic.workflow",
+  "engine": "dsh-bertopic-workflow",
+  "version": "0.1.0",
+  "type": "generic-subprocess-contract",
+  "officialDshRegistration": "pending-host-sdk-specification",
+  "entrypoint": ["-u", "-B", "-m", "bertopic_workflow"],
+  "transport": "stdout-jsonl",
+  "stderr": "diagnostics-only",
+  "commands": ["capabilities", "schema", "doctor", "inspect", "validate", "run", "status", "cancel", "verify", "package"],
+  "credentials": {"transport": "child-environment", "defaultName": "SILICONFLOW_API_KEY", "persistInConfiguration": false},
+  "permissions": {
+    "read": "explicit input files and configured model/embedding files",
+    "write": "configured job/cache directories and explicit package destination",
+    "network": "configured embedding endpoint and model-author downloads when enabled"
+  },
+  "hostResponsibilities": [
+    "Provide the trusted interpreter and install pinned dependencies",
+    "Collect file selection and mapping confirmation before remote embedding",
+    "Show remote-data destination and obtain the application's required consent",
+    "Store credentials with the host secret store; inject them only into the worker",
+    "Render artifact paths only inside the returned run directory",
+    "Treat run_prepared as partial and run_completed/result.json as final",
+    "Handle cancellation and unexpected exits; recover a stale lock explicitly"
+  ]
+}

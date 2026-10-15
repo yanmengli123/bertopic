@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "data": {
+      "type": "object"
+    },
+    "event": {
+      "enum": [
+        "capabilities",
+        "schema",
+        "schema_written",
+        "doctor",
+        "inspected",
+        "config_validated",
+        "job_status",
+        "cancel_requested",
+        "release_verified",
+        "package_created",
+        "run_started",
+        "stage_started",
+        "stage_progress",
+        "stage_completed",
+        "run_prepared",
+        "validation_started",
+        "run_completed",
+        "run_failed",
+        "run_cancelled",
+        "error"
+      ]
+    },
+    "run_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "sequence": {
+      "minimum": 1,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "event",
+    "run_id",
+    "sequence",
+    "at",
+    "data"
+  ],
+  "title": "BERTopic workflow JSONL v1",
+  "type": "object"
+}
